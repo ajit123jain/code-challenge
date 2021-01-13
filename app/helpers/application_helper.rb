@@ -8,5 +8,9 @@ module ApplicationHelper
       notice: "alert-info"
     }.stringify_keys[flash_type.to_s] || flash_type.to_s
   end
+
+  def form_error_message(object, attribute)
+    object.errors[attribute.to_s][0] if object&.errors&.present?
+  end
   
 end

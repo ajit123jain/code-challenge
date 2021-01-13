@@ -1,42 +1,45 @@
 <div class="container py-5">
   <h3>Company</h3>
-  <div class="row">
+  <div class="row" style="margin-bottom: 5px;">
     <div class="col">
-      <%= link_to "< Companies", companies_path %>
+      <%= link_to "Back", companies_path, class: "btn btn-primary" %>
     </div>
     <div class="col text-right">
-      <%= link_to "Edit", edit_company_path %>
+      <%= link_to "Edit", edit_company_path, class: "btn btn-primary" %>
     </div>
   </div>
-  <div class="bg-success">
+  <% bg_color = @company.brand_color.present? ? @company.brand_color : '#28a745' %>
+  <div style="background-color: <%= bg_color %>">
     <div class="container p-5 text-white">
       <h1><%= @company.name %></h1>
-      <h3><mark>City, State</mark></h3>
+      <h3><mark><%= @company.get_city_state%></mark></h3>
       <pre><mark>☝️ This is what needs to be udpated. Examples: Atlanta, GA or Nashvile, TN</mark></pre>
     </div>
   </div>
 
-  <div class="row bg-light">
-    <div class="col-12 col-lg-8 p-lg-5 pt-4">
-      <%= @company.description %>
-    </div>
-    <div class="col-12 col-lg-4 pt-lg-5">
-      <h4>Services</h4>
-      <% @company.services.reject(&:blank?).each do |service| %>
-        <p><%= service %></p>
-      <% end %>
-      <h4>Contact</h4>
-        <div class="form-group" data-controller="clipboard">
-          <p><%= @company.phone %><br>
-          <input type="hidden" value="<%= @company.phone %>" data-target="clipboard.source"></input>
-          <a data-action="clipboard#copy" class="clipboard-button pointer text-decoration-none text-dark"> copy</a>
-          <a data-target="clipboard.notice" class="clipboard-button pointer d-none text-decoration-none text-dark" class="d-none"> copied</a> 
-          </p>         
-        </div>
+  <div class="jumbotron">
+    <div class="row bg-light">
+      <div class="col-12 col-lg-8 p-lg-5 pt-4">
+        <%= @company.description %>
+      </div>
+      <div class="col-12 col-lg-4 pt-lg-5">
+        <h4>Services</h4>
+        <% @company.services.reject(&:blank?).each do |service| %>
+          <p><%= service %></p>
+        <% end %>
+        <h4>Contact</h4>
+          <div class="form-group" data-controller="clipboard">
+            <p><%= @company.phone %><br>
+            <input type="hidden" value="<%= @company.phone %>" data-target="clipboard.source"></input>
+            <a data-action="clipboard#copy" class="clipboard-button pointer text-decoration-none text-dark"> copy</a>
+            <a data-target="clipboard.notice" class="clipboard-button pointer d-none text-decoration-none text-dark" class="d-none"> copied</a> 
+            </p>         
+          </div>
+      </div>
     </div>
   </div>
 
-  <div class="bg-success text-white text-center py-3">
+  <div class="text-white text-center py-3" style="background-color: <%= bg_color %>">
     <p class="lead"><%= @company.phone %> — <%= @company.email %></p>
   </div>
 </div>

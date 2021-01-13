@@ -1,5 +1,21 @@
 <div class="container py-5">
   <h3>New Company</h3>
-  <%= link_to "< Companies", companies_path %>
+  <%= link_to "Back", companies_path, class: "btn btn-primary"  %>
   <%= render "form" %>
 </div>
+<script type="text/javascript">
+$(document).ready(function(){
+  $("#new_company").validate({
+    rules: {
+      "company[email]" : {
+        custom_email_validation: true
+      }
+    },
+    messages: {
+      "company[email]" : {
+        custom_email_validation: "The email should have 'getmainstreet.com' domain."
+      }
+    }
+  });
+})
+</script>

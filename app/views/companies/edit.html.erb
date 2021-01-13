@@ -1,5 +1,22 @@
 <div class="container py-5">
   <h3>Edit Company</h3>
-  <%= link_to "< Company", company_path(@company) %>
+  <%= link_to "Back", company_path(@company), class: "btn btn-primary" %>
   <%= render "form" %>
 </div>
+<script type="text/javascript">
+  $(document).ready(function(){
+    var comapany_id = "<%= @company.id %>"
+    $("#edit_company_"+comapany_id).validate({
+      rules: {
+        "company[email]" : {
+          custom_email_validation: true
+        }
+      },
+      messages: {
+        "company[email]" : {
+          custom_email_validation: "The email should have 'getmainstreet.com' domain."
+        }
+      }
+    });
+  })
+</script>
